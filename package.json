@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-floaterjs": "^1.0.6",
     "react-lazy-load-image-component": "^1.5.0",
     "react-scripts": "3.4.3",
     "react-scroll": "^1.8.1",
