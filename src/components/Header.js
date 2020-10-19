@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Typical from 'react-typical';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import content from '../content';
+import useStartAnimation from '../hook/useStartAnimation';
+import { Link as ScrollLink } from 'react-scroll';
 
 export default function Header() {
-  const [animated, setAnimated] = useState(false);
   const transition = (duration) =>
     `transition duration-${duration} ease-in-out`;
   const styleTranslate = 'translate-y-10 opacity-0';
-  useEffect(() => {
-    setAnimated(true);
-  }, []);
+  const animated = useStartAnimation();
   return (
     <div
       style={{
         background: '#091C29',
       }}
       className="min-h-screen flex items-center justify-center"
+      id="header"
     >
       <div className="flex flex-col items-center justify-center md:flex-row-reverse md:w-10/12 md:justify-between">
         <div className="w-full md:w-2/5 ">
-          <img
+          <LazyLoadImage
             src={content.header.img}
             alt="profile"
             className={`w-full mx-auto`}
+            effect="blur"
+            placeholderSrc={content.header.imgPlaceholder}
           />
         </div>
 
@@ -50,13 +54,15 @@ export default function Header() {
             />
           </h1>
 
-          <button
-            className={` animate-bounce bg-indigo-500 px-10 py-3 text-lg uppercase text-white rounded-lg mt-10 hover:bg-indigo-300 transform  ${
-              animated ? 'translate-y-0' : styleTranslate
-            } ${transition(3500)}`}
-          >
-            {content.header.btnText}
-          </button>
+          <ScrollLink to="mywork" smooth={true}>
+            <button
+              className={` animate-bounce bg-indigo-500 px-10 py-3 text-lg uppercase text-white rounded-lg mt-10 hover:bg-indigo-300 transform  ${
+                animated ? 'translate-y-0' : styleTranslate
+              } ${transition(3500)}`}
+            >
+              {content.header.btnText}
+            </button>
+          </ScrollLink>
         </div>
       </div>
     </div>
